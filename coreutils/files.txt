@@ -1,4 +1,0 @@
-Makefile
-files.txt
-hello.c
-main

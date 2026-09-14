@@ -1,13 +1,17 @@
 
 CC = clang
-CFLAGS = -Wall -g
+CFLAGS = -Wall -Wextra -g
 
-all: main
 
-main: hello.c
-	$(CC) $(CFLAGS) hello.c -o main
+TARGETS = cat clear cp date ls mkdir pwd shell
+
+
+all: $(TARGETS)
+
+%: %.c
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f main
-install:
-	@echo "No installation steps defined."
+	rm -f $(TARGETS)
+
+.PHONY: all clean

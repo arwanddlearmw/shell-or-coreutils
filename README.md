@@ -9,23 +9,15 @@ idk and why someone use my project with his full of his brain
 requiments :
 + unix operating system
 + for windows wsl or msys it will work but native it cant
-
++ Clang or GCC
++ Make
 to download the files do this
 ```bash
 git clone https://github.com/arwanddlearmw/shell-or-coreutils.git
 ```
-(or just download main file)
 
 go to the path file (``cd shell-or-coreutils/coreutils``)
-```bash
-./main
-```
 
-# for build from source
-requments :
-+ Clang or GCC
-+ Make
-(downlload those requirment its very impormant)
 
 ```bash
 cd coreutils

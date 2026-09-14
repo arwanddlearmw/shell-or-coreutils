@@ -20,7 +20,6 @@ go to the path file (``cd shell-or-coreutils/coreutils``)
 
 
 ```bash
-cd coreutils
 make
 ```
 and you got main file : )

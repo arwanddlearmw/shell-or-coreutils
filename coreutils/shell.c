@@ -1,3 +1,4 @@
+#include <linux/limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,6 +11,8 @@ int main(int argc, char *argv[]) {
 	int True = 1;
 	int False = 0;
 	int check = True;
+	char cwd[PATH_MAX];
+	char *path ; 
 	if (argc > 1) {
 		if (freopen(argv[1], "r", stdin) == NULL) {
 			fprintf (stderr , "cant read your fucking file %s\n",argv[1]);
@@ -20,8 +23,8 @@ int main(int argc, char *argv[]) {
 	while (True) {
 		char buffer[1024];
 		// Print a prompt and read input from the user
-
-		if (check) printf("$ ");
+		path = getcwd(cwd , sizeof(cwd));
+		if (check) printf("%s$ ",path);
 		if (fgets(buffer, 1024, stdin) == NULL) break;
 
 		char *nl = strchr(buffer, '\n');
@@ -38,8 +41,15 @@ int main(int argc, char *argv[]) {
 		while (args[i] != NULL) {
 			args[++i] = strtok(NULL, " ");
 		}
+		//built-in commands
 		if (args[0] == NULL) continue;
 		if (strcmp (args[0] , "exit" ) == 0) exit(0);
+		if (strcmp (args[0] , "cd" ) == 0) {
+			if ((chdir(args[1])) == -1){
+				perror("cd");
+			}
+			continue;
+		}
 		// Fork a child process
 		pid_t pid = fork();
 		if (pid > 0) {	
@@ -64,6 +74,9 @@ int handle_redirect (char *args[]) {
 			args[i] = NULL;
 
 			return 1;
+		}
+		if ( strcmp(args[i] , "|") == 0){
+			printf("There is no support with pipes its only support \">\" \n");
 		}
 	}
 }

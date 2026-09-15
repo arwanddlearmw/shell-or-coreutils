@@ -3,7 +3,7 @@ CC = clang
 CFLAGS = -Wall -Wextra -g
 
 
-TARGETS = cat clear cp date ls mkdir pwd shell
+TARGETS = cat.c  clear.c  cp.c  date.c  hello.sh  ls.c  mkdir.c  pwd.c  rm.c  rmdir.c  shell.c 
 
 
 all: $(TARGETS)

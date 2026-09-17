@@ -53,7 +53,7 @@ git clone https://github.com/arwanddlearmw/shell-or-coreutils.git
 
 Then enter the project directory:
 ```bash
-cd shell-or-coreutils/coreutils
+cd shell-or-coreutils
 ```
 
 Build the project:

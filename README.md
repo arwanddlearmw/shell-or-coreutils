@@ -73,4 +73,8 @@ License
 
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0).
 
+<<<<<<< HEAD
 See the LICENSE file for the full license text.
+=======
+See the LICENSE file for the full license text.
+>>>>>>> e5f711a24cffd83c0b90e1347928b053b380148a

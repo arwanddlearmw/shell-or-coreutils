@@ -92,5 +92,7 @@ int handle_redirect (char *args[]) {
 		if ((args[i] && strchr("|&", args[i][0]) != NULL)){
 			printf("There is no support with pipes its only support \">\" \n");
 		}
+
 	}
+	return 0;
 }

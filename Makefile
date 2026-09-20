@@ -1,13 +1,33 @@
-
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -g
 
+BIN = bin
 
-TARGETS = coreutils/ls
+PROGRAMS = \
+	shell \
+	cat \
+	clear \
+	cp \
+	date \
+	ls \
+	mkdir \
+	mv \
+	pwd \
+	rm \
+	rmdir \
+	touch
+
+TARGETS = $(addprefix $(BIN)/,$(PROGRAMS))
 
 all: $(TARGETS)
 
-%: %.c
+$(BIN):
+	mkdir -p $(BIN)
+
+$(BIN)/shell: shell.c | $(BIN)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BIN)/%: coreutils/%.c | $(BIN)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:

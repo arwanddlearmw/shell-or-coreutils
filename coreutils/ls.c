@@ -1,4 +1,3 @@
-
 #include <string.h>
 #include <stdio.h>
 #include <dirent.h>
@@ -8,9 +7,6 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
-int dir_per(char *path){
-    return 0;
-}
 
 int main(int argc , char *argv[]){
     int hide_files = 1;
@@ -66,6 +62,8 @@ int main(int argc , char *argv[]){
             return -1;
         }
         if (details){
+            //dir
+            putchar("d-"[!(S_ISDIR(file_stat.st_mode))]);
             //user permmision
             putchar("r-"[!(file_stat.st_mode & S_IRUSR)]);
             putchar("w-"[!(file_stat.st_mode & S_IWUSR)]);
@@ -83,19 +81,23 @@ int main(int argc , char *argv[]){
             struct passwd *user = getpwuid(file_stat.st_uid);
             struct group *group = getgrgid(file_stat.st_gid);
             printf (" %s ",user ->pw_name);
-            printf ("%s ",group ->gr_name);
+            printf ("%s",group ->gr_name);
             //print last active file time
             char *time_str = ctime(&file_stat.st_ctime);
             time_str[strlen(time_str) - 1] = '\0';
-            printf("%s ",time_str);
+            printf(" %s ",time_str);
         }
         if ((S_ISDIR(file_stat.st_mode))){
             printf ("\e[0;31m%s \n",list->d_name); //print red color
+            continue;
+        }else if (file_stat.st_mode & S_IXUSR || file_stat.st_mode & S_IXGRP || file_stat.st_mode & S_IXOTH){
+            printf ("\e[0;34m %s \n",list->d_name);
             continue;
         }else if ((file_stat.st_mode)){
             printf ("%s \n",list->d_name); //print a normal color
             continue;
         }
+        
     }
     printf ("\n");
     closedir(dir); 

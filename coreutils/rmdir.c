@@ -10,6 +10,6 @@ int main (int argc , char * argv[]) {
             }
         }
     }else {
-        printf("rm: pls type a path");
+        printf("rmdir: pls type a path");
     }
 }

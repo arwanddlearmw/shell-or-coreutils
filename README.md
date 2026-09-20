@@ -61,13 +61,19 @@ Build the project:
 make
 ```
 
-After building, you should get the executable.
+After building, you should get the executable in this path bin/
 
-Using GCC
-
-If you want to build with GCC instead of the default compiler:
+just do ``ls bin/``
+and any excutble file do this command
 ```bash
-make CC=gcc
+./bin/
+```
+
+Using GCC or clang
+
+If you want to build with GCC or Clang instead of the default compiler:
+```bash
+make CC=gcc #or clang
 ```
 License
 

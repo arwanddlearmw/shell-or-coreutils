@@ -89,6 +89,22 @@ int handle_redirect (char *args[]) {
 			close(fd);
 
 		}
+		if ( strcmp(args[i] , "<") == 0){
+			int fd = open (args[i+1], O_RDONLY);
+			if (fd == -1) {
+                perror("");
+                return -1;
+            }
+
+            if (dup2(fd, STDIN_FILENO) == -1) {
+                perror("");
+                close(fd);
+                return -1;
+            }
+
+			args[i] = STDIN_FILENO;
+			close(fd);
+		}
 		if ((args[i] && strchr("|&", args[i][0]) != NULL)){
 			printf("There is no support with pipes its only support \">\" \n");
 		}

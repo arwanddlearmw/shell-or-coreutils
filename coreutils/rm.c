@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,12 +7,18 @@
 
 int remove_directory(const char *path) {
     struct stat path_stat;
-    if (stat(path,&path_stat) != 0) {
+    if (lstat(path,&path_stat) != 0) {
         perror("rm");
         return -1;
     }
     if (S_ISREG(path_stat.st_mode)){
         if (remove (path)){
+            perror ("rm");
+            return -1;
+        }
+        return 0;
+    }else if (S_ISLNK(path_stat.st_mode)){
+        if (unlink (path)){
             perror ("rm");
             return -1;
         }
@@ -58,34 +63,37 @@ int remove_directory(const char *path) {
         r = rmdir(path);
 
     return r;
+    
 }
 
 int main(int argc, char *argv[]) {
     int opt;
     char *target_path = NULL;
     int is_recursive = 0;
-
-    while ((opt = getopt(argc, argv, "r:")) != -1) {
+    if (argc < 2){
+        fprintf(stderr, "pls type a file \n");
+        return 1;
+    }
+    while ((opt = getopt(argc, argv, "r")) != -1) {
         switch (opt) {
             case 'r':
                 is_recursive = 1;
-                
                 break;
             default:
-                continue;
+                return 1;
         }
         
         
     }
     if (is_recursive){
-        for (int i=2;i < argc ; i++){
+        for (int i=optind;i < argc ; i++){
             if ((remove_directory(argv[i])) == -1) {
                 perror("rm");
                 return 1;
             }
         }
     }else {
-        for (int i =1 ; i < argc ; i++){
+        for (int i =optind ; i < argc ; i++){
             if (remove(argv[i]) == -1){
                 perror("rm");
                 return 1;

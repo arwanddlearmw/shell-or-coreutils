@@ -75,12 +75,7 @@ If you want to build with GCC or Clang instead of the default compiler:
 ```bash
 make CC=gcc #or clang
 ```
-License
+# License
 
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0).
-
-<<<<<<< HEAD
-See the LICENSE file for the full license text.
-=======
-See the LICENSE file for the full license text.
->>>>>>> e5f711a24cffd83c0b90e1347928b053b380148a
+The full rights on https://github.com/arwanddlearmw/shell-or-coreutils/blob/main/LICENSE .
